@@ -854,6 +854,22 @@ impl<T: Clone> ToOwned for [T] {
     }
 }
 
+#[stable(feature = "slice_from_str", since = "CURRENT_RUSTC_VERSION")]
+impl<'a> From<&'a str> for &'a [u8] {
+    /// Converts a string slice into a bytes slice
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// assert_eq!("eggplant".into(), b"eggplant".as_slice());
+    /// ```
+    ///
+    #[inline]
+    fn from(s: &'a str) -> Cow<'a, str> {
+        s.as_bytes()
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Sorting
 ////////////////////////////////////////////////////////////////////////////////
